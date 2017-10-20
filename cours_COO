@@ -1,0 +1,62 @@
+
+https://www.jmdoudoux.fr/java/dej/chap-annotations.htm
+
+string req = "Select * from joueur where id =?"
+PreparedStatement ps = comm.preparedStatement(req);
+ps.setInt(1, id);
+ResultSet rs = ps.excecuteQuery();
+rs.next();
+joueur j = new Joueur(rs.getString(1), rs.get....);
+return j;
+
+
+//DATA MAPPER
+//MAUVAISE SOLUTION
+Map<integer, Joueur> map;
+
+Joueur find(int id)
+{
+Joueur j = map.get(i);
+if (j == null)
+   {
+      map.put(id, j);
+      add_in_bdd();
+   }
+   return j;
+}
+
+--------> Utilisation de weak reference
+
+Lorsqu'un objet n'est plus accédé que par des weak références -> on le supprime
+Création de weak reference :
+
+Joueur j1 = new Joueur(42);
+joueur j2 = new Joueur(41);
+
+weakReference = new WeakReference<Joueur> (j2);
+
+Joueur j4 = j3.get();
+
+
+//DATA MAPPER
+//BONNE SOLUTION
+Map<integer, WeakReference<Joueur>> map;
+
+Joueur find(int id)
+{
+	Joueur j = null;
+     	if (map.get(i) != null)
+	   j = map.get(i).get();
+
+	map.put(id, new WeakReference(j));
+	return (j);
+}
+
+
+//MAUVAISE IMPLEMENTATION DE CLASSE
+Joueur{
+	List<Partie> p;
+	}
+Partie{
+	List<Joueur> j;
+}
