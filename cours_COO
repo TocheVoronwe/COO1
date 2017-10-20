@@ -60,3 +60,30 @@ Joueur{
 Partie{
 	List<Joueur> j;
 }
+
+//LA REFLEXION
+Joueur j = _________;
+String str = _______;
+Method m = Joueur.class.getMethod(str);
+Object obj = m.invoke(j);
+
+//CLASSE DATA_MAPING
+insert (T obj);
+String table;
+List<String> attributs;
+
+insert(T obj){
+	 String req = "Insert ______";
+	 for (f: attributs){
+	 //ajouter"?" à req;
+	 }
+	 PreparedStatement ps = __________(req);
+	 for (f: attributs){
+	 /*method m = T.class.getMethod("get" + f);  ne marche pas*/
+	 new DM<Joueur>("table", ____, Joueur.class);
+	 method = maClasse.getMethod("get" + f);
+	 Object o = m.invoke(obj);
+	 if (o instanceof(String)
+	    ps.setString(i, (string)o);
+	 }
+	 }
